@@ -81,6 +81,8 @@ function createRun(text,parentRun,codeName,tagContent){
         run.fauxBold = parentRun.fauxBold;
         run.fauxItalic = parentRun.fauxItalic;
     }
+
+    codeName = codeName.toLowerCase();
        
     if (codeName === "b") {
         run.bold = true;
@@ -132,7 +134,7 @@ function parseFontSize(tagContent){
 */
 function parseColor(tagContent) {
     try {
-        var hex = tagContent.substring(tagContent.indexOf("=")+1,tagContent.length-1)
+        var hex = tagContent.substring(tagContent.indexOf("=")+1,tagContent.length-1).toLowerCase();
         var r = eval("0x"+hex.substring(1,3)).toString(10);
         var g = eval("0x"+hex.substring(3,5)).toString(10);
         var b = eval("0x"+hex.substring(5,7)).toString(10);
@@ -193,7 +195,7 @@ function getBBCodeName(str) {
         if (match.indexOf("=")!= -1) {
             match = match.substring(0,match.indexOf("="));
         }
-        if (supportedBBCodes.indexOf(match) != -1) {
+        if (supportedBBCodes.indexOf(match.toLowerCase()) != -1) {
             return match;
         }
     }
