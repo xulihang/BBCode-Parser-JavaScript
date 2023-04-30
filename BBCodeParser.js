@@ -6,7 +6,6 @@ function parseBBCode(text){
     var run = {};
 	run.text = text;
     var valid = validBBCode(text);
-    console.log(valid);
     if (valid) {
         return parseRun(run);
     }else{
@@ -195,7 +194,7 @@ function getBBCodeName(str) {
         if (match.indexOf("=")!= -1) {
             match = match.substring(0,match.indexOf("="));
         }
-        if (supportedBBCodes.indexOf(match.toLowerCase()) != -1) {
+        if (isSupportedBBCode(match)) {
             return match;
         }
     }
@@ -207,7 +206,6 @@ function validBBCode(str) {
     var regex = new RegExp("\\[/?(.*?)]","g");
     var matchObject = regex.exec(str);
     while (matchObject) {
-        console.log(matchObject);
         var match = matchObject[1];
 		if (match.indexOf("=") != -1) {
             match = match.substring(0,match.indexOf("="));
@@ -215,16 +213,26 @@ function validBBCode(str) {
 		if (match.indexOf("[") != -1 || match.indexOf("]") != -1) {
             return false;
         } 
-		if (supportedBBCodes.indexOf(match.toLowerCase()) != -1) {
+		if (isSupportedBBCode(match)) {
             count = count + 1;
         }
         matchObject = regex.exec(str);
     }
-    console.log("bbcode count: "+count);
 	if (count > 0) {
         if (count % 2 === 0) {
             return true;
         }
     }
 	return false;
+}
+
+function isSupportedBBCode(code) {
+    code = code.toLowerCase();
+    for (var index = 0; index < supportedBBCodes.length; index++) {
+        var bbcode = supportedBBCodes[index];
+        if (code === bbcode) {
+            return true;
+        }
+    }
+    return false;
 }
