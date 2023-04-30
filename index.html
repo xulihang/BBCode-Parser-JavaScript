@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RichText Example</title>
+    <script src="BBCodeParser.js"></script>
+    <style>
+    </style>
+  </head>
+  <body>
+    <div>
+      <button onClick="parse();">Parse</button>
+      <div>
+        <textarea>[color=#ff0000][i][b]Red bold italic[/b][/i][/color] text.
+        </textarea>
+      </div>
+      
+      <div id="result"></div>
+    </div>
+    <script>
+      function parse(){
+        const text = document.querySelector("textarea");
+        console.log(text);
+      }
+    </script>
+  </body>
+</html>
