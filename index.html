@@ -12,7 +12,7 @@
     <div>
       <button onClick="parse();">Parse</button>
       <div>
-        <textarea>[color=#ff0000][i][b]Red bold italic[/b][/i][/color] and [fontsize=32][fontname=SimSun]SimSun with size[/fontname][/fontsize].
+        <textarea>[color=#ff0000][i][b]Red bold italic[/b][/i][/color] and [fontsize=32][fontname=sans-serif;]Sans Serif with size[/fontname][/fontsize].
         </textarea>
       </div>
       
@@ -24,6 +24,33 @@
         console.log(text);
         const parsed = parseBBCode(text.value)
         console.log(parsed);
+        buildTextRuns(parsed);
+      }
+
+      function buildTextRuns(runs) {
+        document.getElementById("result").innerHTML = "";
+        for (let index = 0; index < runs.length; index++) {
+            const run = runs[index];
+            var span = document.createElement("span");
+            span.innerText = run.text;
+
+            if (run.bold || run.fauxBold) {
+                span.style.fontWeight = "bold";
+            }
+            if (run.italic || run.fauxItalic) {
+                span.style.fontStyle = "italic";
+            }
+            if (run.color) {
+                span.style.color = "rgb(" + run.color.r + "," + run.color.g + "," + run.color.b + ")";
+            }
+            if (run.fontsize) {
+                span.style.fontSize = run.fontsize + "px";
+            }
+            if (run.fontname) {
+                span.style.fontFamily = run.fontname;
+            }
+            document.getElementById("result").append(span);
+        }
       }
     </script>
   </body>
