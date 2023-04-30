@@ -203,7 +203,7 @@ function getBBCodeName(str) {
 }
 
 function validBBCode(str) {
-	var count = 0;
+    var count = 0;
     var regex = new RegExp("\\[/?(.*?)]","g");
     var matchObject = regex.exec(str);
     while (matchObject) {
