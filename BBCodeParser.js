@@ -148,14 +148,14 @@ function parseColor(tagContent) {
 * [b]Hello [i]world[/i][/b] -> Hello [i]world[/i]
 */
 function codePairStripped(runText,tagContent,endTag) {
-    runText = runText.replaceAll(tagContent,"")
-    runText = runText.replaceAll(endTag,"")
+    runText = runText.replace(tagContent,"")
+    runText = runText.replace(endTag,"")
     return runText;
 }
 
 function escaped(text) {
-  text = text.replaceAll("\[","\\[");
-  text = text.replaceAll("\]","\\]");
+  text = text.replace("\[","\\[");
+  text = text.replace("\]","\\]");
   return text;
 }
 
