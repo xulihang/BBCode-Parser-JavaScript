@@ -21,7 +21,7 @@ function parseRun(run){
     }
 	var str = run.text;
     var	plainText = "";
-    for (let index = 0; index <= str.length - 1; index++) {
+    for (var index = 0; index <= str.length - 1; index++) {
         if (currentChar(str,index) === "[") {
             var tagContent = textUntil("]",str,index);
             var codeName = getBBCodeName(tagContent);
@@ -59,7 +59,7 @@ function parseInnerRuns(run,runs) {
     if (parsedRuns.length === 1) {// no tags
         runs.push(parsedRuns[0]);
     }else{
-        for (let index = 0; index < parsedRuns.length; index++) {
+        for (var index = 0; index < parsedRuns.length; index++) {
             var innerRun = parsedRuns[index];
             parseInnerRuns(innerRun,runs)
         }
