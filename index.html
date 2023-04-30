@@ -12,7 +12,7 @@
     <div>
       <button onClick="parse();">Parse</button>
       <div>
-        <textarea>[color=#ff0000][i][b]Red bold italic[/b][/i][/color] text.
+        <textarea>[color=#ff0000][i][b]Red bold italic[/b][/i][/color] and [fontsize=32][fontname=SimSun]SimSun with size[/fontname][/fontsize].
         </textarea>
       </div>
       
@@ -22,6 +22,8 @@
       function parse(){
         const text = document.querySelector("textarea");
         console.log(text);
+        const parsed = parseBBCode(text.value)
+        console.log(parsed);
       }
     </script>
   </body>
