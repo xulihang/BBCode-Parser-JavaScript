@@ -5,7 +5,13 @@ var supportedBBCodes = ["b","color","i","fi","fb","fontname","fontsize"];
 function parseBBCode(text){
     var run = {};
 	run.text = text;
-	return parseRun(run);
+    var valid = validBBCode(text);
+    console.log(valid);
+    if (valid) {
+        return parseRun(run);
+    }else{
+        return [run];
+    }
 }
 
 function parseRun(run){
@@ -192,4 +198,31 @@ function getBBCodeName(str) {
         }
     }
     return "";
+}
+
+function validBBCode(str) {
+	var count = 0;
+    var regex = new RegExp("\\[/?(.*?)]","g");
+    var matchObject = regex.exec(str);
+    while (matchObject) {
+        console.log(matchObject);
+        var match = matchObject[1];
+		if (match.indexOf("=") != -1) {
+            match = match.substring(0,match.indexOf("="));
+        }
+		if (match.indexOf("[") != -1 || match.indexOf("]") != -1) {
+            return false;
+        } 
+		if (supportedBBCodes.indexOf(match.toLowerCase()) != -1) {
+            count = count + 1;
+        }
+        matchObject = regex.exec(str);
+    }
+    console.log("bbcode count: "+count);
+	if (count > 0) {
+        if (count % 2 === 0) {
+            return true;
+        }
+    }
+	return false;
 }
